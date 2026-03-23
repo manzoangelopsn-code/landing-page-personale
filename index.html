@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angelo Manzo | Social Media Manager</title>
+  <meta name="description" content="Angelo Manzo — Social Media Manager & Stratega. I post li sa fare chiunque. La strategia è un'altra cosa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d0d0d; --bg-2: #111111; --card: #161616;
+      --text: #f0ede8; --muted: #6b6b6b;
+      --accent: #e8ff00; --accent-dim: rgba(232,255,0,0.12);
+      --border: rgba(240,237,232,0.08); --radius: 16px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; overflow-x: hidden; }
+
+    /* NAV */
+    .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 100; height: 68px; display: flex; align-items: center; padding: 0 48px; background: rgba(13,13,13,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 20px; font-weight: 800; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--text); }
+    .btn-nav { background: var(--accent); color: #0d0d0d; padding: 10px 22px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; transition: opacity 0.2s, transform 0.2s; }
+    .btn-nav:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 100px 48px 80px; }
+    .blobs { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.15; animation: blobFloat 9s ease-in-out infinite; }
+    .blob-1 { width: 520px; height: 520px; background: var(--accent); top: -120px; left: -120px; animation-delay: 0s; }
+    .blob-2 { width: 420px; height: 420px; background: #00d4ff; bottom: -80px; right: -80px; animation-delay: 3s; }
+    .blob-3 { width: 320px; height: 320px; background: #a855f7; top: 40%; left: 45%; animation-delay: 6s; }
+    @keyframes blobFloat { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(28px,-18px) scale(1.04); } 66% { transform: translate(-18px,28px) scale(0.96); } }
+
+    .hero-marquee-bg { position: absolute; bottom: 40px; left: 0; right: 0; overflow: hidden; opacity: 0.04; pointer-events: none; }
+    .hero-marquee-track { display: flex; white-space: nowrap; animation: scroll 22s linear infinite; }
+    .hero-marquee-track span { font-size: 80px; font-weight: 900; letter-spacing: -0.03em; padding-right: 60px; text-transform: uppercase; flex-shrink: 0; }
+    @keyframes scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    .hero-inner { max-width: 1200px; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; position: relative; z-index: 2; }
+
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-dim); border: 1px solid rgba(232,255,0,0.25); border-radius: 100px; padding: 7px 18px; font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 28px; animation: badgePulse 3s ease-in-out infinite; }
+    .hero-badge::before { content: '✦'; font-size: 9px; }
+    @keyframes badgePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(232,255,0,0.2); } 50% { box-shadow: 0 0 0 8px rgba(232,255,0,0); } }
+
+    .hero-title { font-size: clamp(48px, 6vw, 80px); font-weight: 900; line-height: 1.0; letter-spacing: -0.03em; margin-bottom: 24px; }
+    .hero-title .hollow { -webkit-text-stroke: 2px var(--text); color: transparent; display: block; }
+    .hero-title .accent { color: var(--accent); display: block; }
+
+    .hero-sub { font-size: 16px; line-height: 1.75; color: var(--muted); margin-bottom: 40px; max-width: 460px; }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+
+    .hero-actions { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #0d0d0d; padding: 14px 28px; border-radius: 10px; font-size: 14px; font-weight: 700; text-decoration: none; transition: opacity 0.2s, transform 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-ghost { color: var(--muted); font-size: 14px; font-weight: 500; text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
+    .btn-ghost:hover { color: var(--text); border-color: var(--text); }
+
+    .hero-stats { display: flex; flex-direction: column; gap: 16px; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .stat-card:hover { border-color: rgba(232,255,0,0.3); }
+    .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--accent); }
+    .stat-card.featured { background: var(--accent); border-color: var(--accent); }
+    .stat-card.featured::before { background: rgba(0,0,0,0.15); }
+    .stat-card.featured .stat-num { color: #0d0d0d; }
+    .stat-card.featured .stat-lbl { color: rgba(13,13,13,0.55); }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .stat-num { font-size: 46px; font-weight: 900; line-height: 1; letter-spacing: -0.03em; color: var(--accent); }
+    .stat-lbl { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 6px; }
+
+    /* MARQUEE STRIP */
+    .strip { background: var(--accent); overflow: hidden; padding: 18px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .strip-track { display: flex; animation: scroll 18s linear infinite; white-space: nowrap; }
+    .strip-item { font-size: 12px; font-weight: 700; color: #0d0d0d; letter-spacing: 0.12em; text-transform: uppercase; padding: 0 32px; flex-shrink: 0; }
+    .strip-item::after { content: '·'; margin-left: 32px; opacity: 0.35; }
+
+    /* SECTIONS */
+    .section { padding: 120px 48px; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .s-label { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .s-title { font-size: clamp(40px, 5vw, 64px); font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 56px; }
+
+    /* BENTO */
+    .bento-bg { background: var(--bg-2); }
+    .bento-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .bento-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px; transition: border-color 0.3s, transform 0.3s; }
+    .bento-card:hover { border-color: rgba(232,255,0,0.2); transform: translateY(-2px); }
+    .bento-wide { grid-column: span 2; }
+    .bento-accent { background: var(--accent); border-color: var(--accent); }
+    .bento-accent * { color: #0d0d0d !important; }
+    .bento-icon { font-size: 30px; margin-bottom: 16px; }
+    .bento-card h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .bento-card p { font-size: 14px; line-height: 1.75; color: var(--muted); }
+    .big-num { font-size: 54px; font-weight: 900; letter-spacing: -0.04em; color: var(--accent); line-height: 1; }
+    .big-num-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .skills { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+    .skills li { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+    .skills li::before { content: '→'; color: var(--accent); font-weight: 700; }
+    .cta-text { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 20px; color: #0d0d0d; }
+    .bento-accent .cta-btn {
+      display: block; background: #0d0d0d !important; color: #e8ff00 !important;
+      padding: 18px 32px; border-radius: 12px;
+      font-size: 16px; font-weight: 800;
+      text-decoration: none; text-align: center;
+      letter-spacing: 0.02em;
+      transition: transform 0.2s;
+    }
+    .bento-accent .cta-btn:hover { transform: translateY(-2px); }
+
+    /* SERVIZI */
+    .srv-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+    .srv-card { background: var(--bg); padding: 44px 36px; position: relative; overflow: hidden; }
+    .srv-card::after { content: ''; position: absolute; inset: 0; background: var(--accent); transform: translateY(101%); transition: transform 0.4s cubic-bezier(0.16,1,0.3,1); z-index: 0; }
+    .srv-card:hover::after { transform: translateY(0); }
+    .srv-card > * { position: relative; z-index: 1; }
+    .srv-card:hover .srv-n, .srv-card:hover .srv-name, .srv-card:hover .srv-desc { color: #0d0d0d; }
+    .srv-n { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 20px; transition: color 0.2s; }
+    .srv-name { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 12px; transition: color 0.2s; }
+    .srv-desc { font-size: 13px; line-height: 1.7; color: var(--muted); transition: color 0.2s; }
+
+    /* PROGETTI */
+    .proj-bg { background: var(--bg-2); }
+    .proj-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
+    .proj-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 44px; text-decoration: none; color: inherit; display: block; position: relative; transition: border-color 0.3s, transform 0.3s; }
+    .proj-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .proj-card:hover .proj-arrow { transform: translate(4px,-4px); }
+    .proj-featured { grid-column: span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+    .proj-sector { font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .proj-name { font-size: 46px; font-weight: 900; letter-spacing: -0.03em; line-height: 1.0; margin-bottom: 18px; }
+    .proj-featured .proj-name { font-size: 62px; }
+    .proj-desc { font-size: 14px; line-height: 1.8; color: var(--muted); margin-bottom: 24px; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .proj-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 11px; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); }
+    .proj-arrow { position: absolute; top: 40px; right: 40px; font-size: 20px; color: var(--muted); transition: transform 0.3s; }
+    .metrics { display: flex; gap: 28px; margin-bottom: 24px; }
+    .m-val { font-size: 38px; font-weight: 900; letter-spacing: -0.03em; color: var(--accent); line-height: 1; }
+    .m-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+    .proj-note { font-size: 14px; line-height: 1.8; color: var(--muted); }
+    .proj-note strong { color: var(--text); font-weight: 600; }
+    .proj-footer { margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .proj-footer p { font-size: 13px; color: var(--muted); }
+    .proj-footer a { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; border-bottom: 1px solid var(--border); padding-bottom: 3px; transition: color 0.2s, border-color 0.2s; }
+    .proj-footer a:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* CONTATTO */
+    .contact { background: var(--text); color: #0d0d0d; }
+    .contact .s-label { color: rgba(13,13,13,0.4); }
+    .contact .s-title { color: #0d0d0d; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .contact-desc { font-size: 16px; line-height: 1.8; color: rgba(13,13,13,0.55); margin-bottom: 44px; }
+    .clinks { display: flex; flex-direction: column; }
+    .clink { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; border-bottom: 1px solid rgba(13,13,13,0.12); text-decoration: none; color: #0d0d0d; transition: padding-left 0.3s; }
+    .clink:hover { padding-left: 10px; }
+    .clink-lbl { font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(13,13,13,0.4); margin-bottom: 4px; }
+    .clink-val { font-size: 17px; font-weight: 600; }
+    .clink-arr { font-size: 18px; opacity: 0.3; }
+    .cform { display: flex; flex-direction: column; }
+    .cform input, .cform textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(13,13,13,0.15); padding: 18px 0; font-size: 15px; font-family: 'Inter',sans-serif; color: #0d0d0d; outline: none; resize: none; transition: border-color 0.2s; }
+    .cform input::placeholder, .cform textarea::placeholder { color: rgba(13,13,13,0.3); }
+    .cform input:focus, .cform textarea:focus { border-color: #0d0d0d; }
+    .btn-submit { margin-top: 32px; background: #0d0d0d; color: var(--accent); padding: 15px 32px; border-radius: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border: none; cursor: pointer; align-self: flex-start; transition: opacity 0.2s, transform 0.2s; }
+    .btn-submit:hover { opacity: 0.85; transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { padding: 36px 48px; border-top: 1px solid var(--border); }
+    .foot { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .foot-logo { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
+    .foot-logo span { color: var(--accent); }
+    .foot-copy { font-size: 12px; color: var(--muted); }
+    .foot-ig { font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .foot-ig:hover { color: var(--accent); }
+
+    /* REVEAL */
+    .reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.rdy { opacity: 0; transform: translateY(28px); }
+    .reveal.vis { opacity: 1; transform: translateY(0); }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      .navbar { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
+      .hero-stats { display: none; }
+      .section { padding: 80px 24px; }
+      .bento-grid, .srv-grid, .proj-grid { grid-template-columns: 1fr; }
+      .bento-wide { grid-column: span 1; }
+      .proj-featured { grid-column: span 1; grid-template-columns: 1fr; }
+      .proj-featured .proj-name { font-size: 46px; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">Angelo<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="#chi-sono">Chi sono</a></li>
+        <li><a href="#servizi">Servizi</a></li>
+        <li><a href="#progetti">Progetti</a></li>
+      </ul>
+      <a href="#contatto" class="btn-nav">Contattami</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="blobs"><div class="blob blob-1"></div><div class="blob blob-2"></div><div class="blob blob-3"></div></div>
+    <div class="hero-marquee-bg">
+      <div class="hero-marquee-track">
+        <span>Social Media Manager</span><span>Strategia</span><span>Content</span><span>Meta Ads</span>
+        <span>Social Media Manager</span><span>Strategia</span><span>Content</span><span>Meta Ads</span>
+      </div>
+    </div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">Social Media Manager · Roma</div>
+        <h1 class="hero-title">
+          <span class="hollow">I POST LI</span>
+          SA FARE<br>
+          <span class="accent">CHIUNQUE.</span>
+        </h1>
+        <p class="hero-sub">La strategia è un'altra cosa. Sono <strong>Angelo Manzo</strong> — faccio in modo che la tua presenza social lavori per te. Crescita organica, contenuti con identità, campagne che convertono.</p>
+        <div class="hero-actions">
+          <a href="#contatto" class="btn-primary">Parliamo del tuo progetto →</a>
+          <a href="#progetti" class="btn-ghost">Vedi i lavori</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card featured">
+          <div class="stat-num">Dal 2020</div>
+          <div class="stat-lbl">Nel mondo del digitale</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-num">Social</div><div class="stat-lbl">Media Strategy</div></div>
+          <div class="stat-card"><div class="stat-num">Meta</div><div class="stat-lbl">Ads & Campagne</div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-card"><div class="stat-num">Content</div><div class="stat-lbl">Creation & Copy</div></div>
+          <div class="stat-card"><div class="stat-num">AI</div><div class="stat-lbl">Tools & Automation</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRIP -->
+  <div class="strip">
+    <div class="strip-track">
+      <span class="strip-item">Social Media Strategy</span><span class="strip-item">Content Creation</span>
+      <span class="strip-item">Meta Ads</span><span class="strip-item">Crescita Organica</span>
+      <span class="strip-item">Festival & Nightlife</span><span class="strip-item">Instagram Marketing</span>
+      <span class="strip-item">Copywriting</span><span class="strip-item">AI Tools</span>
+      <span class="strip-item">Social Media Strategy</span><span class="strip-item">Content Creation</span>
+      <span class="strip-item">Meta Ads</span><span class="strip-item">Crescita Organica</span>
+      <span class="strip-item">Festival & Nightlife</span><span class="strip-item">Instagram Marketing</span>
+      <span class="strip-item">Copywriting</span><span class="strip-item">AI Tools</span>
+    </div>
+  </div>
+
+  <!-- CHI SONO -->
+  <section id="chi-sono" class="section bento-bg">
+    <div class="container">
+      <p class="s-label reveal">Chi sono</p>
+      <h2 class="s-title reveal">Non solo<br>post.</h2>
+      <div class="bento-grid reveal">
+        <div class="bento-card bento-wide">
+          <div class="bento-icon">🎯</div>
+          <h3>La mia visione</h3>
+          <p>Sono Angelo Manzo, Social Media Manager e stratega digitale basato a Roma. Dal 2020 lavoro con brand di ogni tipo — con un unico obiettivo: fare in modo che ogni profilo social lavori davvero per il business. Niente vanity metrics, niente post fini a se stessi. Solo strategia, contenuti con identità e risultati misurabili.</p>
+        </div>
+        <div class="bento-card">
+          <div class="big-num">Roma</div>
+          <div class="big-num-sub">e non solo</div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-icon">⚡️</div>
+          <h3>Competenze</h3>
+          <ul class="skills">
+            <li>Social Media Strategy</li>
+            <li>Content Creation</li>
+            <li>Meta Ads</li>
+            <li>Copywriting</li>
+            <li>AI Tools</li>
+          </ul>
+        </div>
+        <div class="bento-card">
+          <div class="big-num">+4</div>
+          <div class="big-num-sub">Anni nel digitale</div>
+        </div>
+        <div class="bento-card bento-accent">
+          <p class="cta-text">Pronto a far crescere il tuo brand?</p>
+          <a href="#contatto" class="cta-btn">Scrivimi ora →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIZI -->
+  <section id="servizi" class="section">
+    <div class="container">
+      <p class="s-label reveal">Cosa faccio</p>
+      <h2 class="s-title reveal">Servizi</h2>
+      <div class="srv-grid reveal">
+        <div class="srv-card"><div class="srv-n">01</div><div class="srv-name">Social Media Management</div><p class="srv-desc">Gestione completa del profilo Instagram: piano editoriale, caption, scheduling, stories. Presenza costante, identità coerente.</p></div>
+        <div class="srv-card"><div class="srv-n">02</div><div class="srv-name">Content Strategy</div><p class="srv-desc">Calendari editoriali su misura, pillar di contenuto, tone of voice. Una strategia costruita per crescere, non per riempire il feed.</p></div>
+        <div class="srv-card"><div class="srv-n">03</div><div class="srv-name">Meta Ads</div><p class="srv-desc">Campagne Facebook e Instagram per awareness, engagement e conversioni. Audience fredde, lookalike, retargeting. Budget ottimizzato.</p></div>
+        <div class="srv-card"><div class="srv-n">04</div><div class="srv-name">Copywriting</div><p class="srv-desc">Testi che fanno fermare il pollice. Caption con identità, copy per eventi, bio e headline che comunicano prima di tutto il valore.</p></div>
+        <div class="srv-card"><div class="srv-n">05</div><div class="srv-name">Consulenza & Strategia</div><p class="srv-desc">Audit del profilo, analisi competitor, piano strategico. Per chi vuole capire dove sta andando prima di correre.</p></div>
+        <div class="srv-card"><div class="srv-n">06</div><div class="srv-name">AI Tools & Automation</div><p class="srv-desc">Produzione di contenuti visivi con AI, prompt engineering, flussi di lavoro ottimizzati. Più output, stessa qualità.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGETTI -->
+  <section id="progetti" class="section proj-bg">
+    <div class="container">
+      <p class="s-label reveal">Progetti</p>
+      <h2 class="s-title reveal">Alcuni dei<br>miei lavori</h2>
+      <div class="proj-grid reveal">
+
+        <a href="https://www.instagram.com/asteria_praia/" target="_blank" class="proj-card proj-featured">
+          <div>
+            <p class="proj-sector">Nightclub & Aperitivo · Praia a Mare, Calabria</p>
+            <h3 class="proj-name">Asteria</h3>
+            <p class="proj-desc">Gestione completa dei canali di comunicazione del locale. Ho seguito la costruzione dell'identità visiva dall'inizio, lavorando insieme al team per creare uno stile riconoscibile. Ogni contenuto — foto, reel, stories, copy — è prodotto internamente con l'obiettivo di convertire views in presenze reali.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Identità visiva</span><span class="proj-tag">Instagram SMM</span>
+              <span class="proj-tag">Meta Ads</span><span class="proj-tag">Funnel WhatsApp</span><span class="proj-tag">Content Creation</span>
+            </div>
+          </div>
+          <div>
+            <div class="metrics">
+              <div><div class="m-val">+30%</div><div class="m-lbl">Conversioni offline</div></div>
+              <div><div class="m-val">100%</div><div class="m-lbl">Organico</div></div>
+            </div>
+            <p class="proj-note">Strategia orientata alla conversione offline: da follower a cliente al bancone. <strong>+30% di conversioni rispetto alla stagione precedente</strong>, solo tramite organico.</p>
+          </div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+        <a href="https://www.instagram.com/ilpescespada/" target="_blank" class="proj-card">
+          <p class="proj-sector">Beach Club · Alto Tirreno Cosentino</p>
+          <h3 class="proj-name">Il Pescespada<br>Beach Club</h3>
+          <div class="metrics"><div><div class="m-val">#1</div><div class="m-lbl">Beach club innovativo</div></div><div><div class="m-val">100%</div><div class="m-lbl">Contenuti originali</div></div></div>
+          <p class="proj-desc">Comunicazione per uno dei beach club più innovativi dell'alto Tirreno cosentino. Il focus è sulla sostenibilità e sul lifestyle: contenuti che raccontano un modo di vivere il mare, non solo un posto dove andare.</p>
+          <div class="proj-tags"><span class="proj-tag">Social Media Manager</span><span class="proj-tag">Sostenibilità</span><span class="proj-tag">Lifestyle Content</span></div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+        <div class="proj-card">
+          <p class="proj-sector">Evento culturale · Roma, 2025</p>
+          <h3 class="proj-name">TEDx<br>SapienzaU</h3>
+          <div class="metrics"><div><div class="m-val">2025</div><div class="m-lbl">Edizione</div></div><div><div class="m-val">Team</div><div class="m-lbl">+ Agenzie esterne</div></div></div>
+          <p class="proj-desc">Ufficio di comunicazione di TEDxSapienzaU 2025. Strategia social orientata alla conversione del main event <em>Paradoxa</em>, in collaborazione con professionisti e agenzie esterne.</p>
+          <div class="proj-tags"><span class="proj-tag">Comunicazione</span><span class="proj-tag">Social Strategy</span><span class="proj-tag">Content Creation</span><span class="proj-tag">Team & Agenzie</span></div>
+          <div class="proj-arrow">↗</div>
+        </div>
+
+        <a href="https://www.instagram.com/quattro_e20/" target="_blank" class="proj-card">
+          <p class="proj-sector">Community studentesca · Calabria</p>
+          <h3 class="proj-name">Quattro<br>e20</h3>
+          <div class="metrics"><div><div class="m-val">0→1</div><div class="m-lbl">Da zero a community</div></div><div><div class="m-val">Multi</div><div class="m-lbl">Regione Calabria</div></div></div>
+          <p class="proj-desc">Partito come un piccolo progetto eventi locali, oggi 4e20 è una vera community studentesca con un'identità che va oltre gli eventi: un brand che comunica valori e cresce per affezione.</p>
+          <div class="proj-tags"><span class="proj-tag">Community Building</span><span class="proj-tag">Brand Identity</span><span class="proj-tag">Event Marketing</span></div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+        <a href="https://www.instagram.com/lido_solmar/" target="_blank" class="proj-card">
+          <p class="proj-sector">Ristorazione · Riviera dei Cedri</p>
+          <h3 class="proj-name">Solmar</h3>
+          <div class="metrics"><div><div class="m-val">Top3</div><div class="m-lbl">Locali più recensiti</div></div><div><div class="m-val">F&B</div><div class="m-lbl">Riposizionamento</div></div></div>
+          <p class="proj-desc">Rivalutazione del progetto digitale con focus food & beverage. I social trasformati in landing page per convertire via TheFork. Oggi Solmar è nella top 3 dei locali più recensiti della Riviera dei Cedri.</p>
+          <div class="proj-tags"><span class="proj-tag">Strategia F&B</span><span class="proj-tag">TheFork</span><span class="proj-tag">Conversione digitale</span></div>
+          <div class="proj-arrow">↗</div>
+        </a>
+
+      </div>
+      <div class="proj-footer">
+        <p>Questi sono alcuni dei progetti — altri lavori disponibili su richiesta.</p>
+        <a href="https://www.instagram.com/angelo1.manzo/" target="_blank">Vedi il mio Instagram ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTO -->
+  <section id="contatto" class="section contact">
+    <div class="container">
+      <div class="contact-grid reveal">
+        <div>
+          <p class="s-label">Contatto</p>
+          <h2 class="s-title">Hai un<br>progetto?</h2>
+          <p class="contact-desc">Hai un progetto, un'idea o un brand che vuole crescere? Sono aperto a nuove collaborazioni. Scrivimi — rispondo entro 24 ore.</p>
+          <div class="clinks">
+            <a href="https://instagram.com/angelo1.manzo" target="_blank" class="clink">
+              <div><div class="clink-lbl">Instagram</div><div class="clink-val">@angelo1.manzo</div></div>
+              <div class="clink-arr">→</div>
+            </a>
+            <a href="mailto:manzoangelopsn@gmail.com" class="clink">
+              <div><div class="clink-lbl">Email</div><div class="clink-val">manzoangelopsn@gmail.com</div></div>
+              <div class="clink-arr">→</div>
+            </a>
+          </div>
+        </div>
+        <div class="cform">
+          <input type="text" placeholder="Il tuo nome" />
+          <input type="email" placeholder="Email" />
+          <input type="text" placeholder="Di cosa hai bisogno?" />
+          <textarea rows="4" placeholder="Raccontami il tuo progetto..."></textarea>
+          <button class="btn-submit">Invia messaggio</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="foot">
+      <span class="foot-logo">Angelo<span>.</span></span>
+      <p class="foot-copy">© 2026 Angelo Manzo — Social Media Manager · Roma</p>
+      <a href="https://instagram.com/angelo1.manzo" target="_blank" class="foot-ig">@angelo1.manzo ↗</a>
+    </div>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => { el.classList.add('rdy'); obs.observe(el); });
+  </script>
+
+</body>
+</html>
