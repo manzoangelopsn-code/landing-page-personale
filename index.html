@@ -411,13 +411,24 @@
             </a>
           </div>
         </div>
-        <div class="cform">
-          <input type="text" placeholder="Il tuo nome" />
-          <input type="email" placeholder="Email" />
-          <input type="text" placeholder="Di cosa hai bisogno?" />
-          <textarea rows="4" placeholder="Raccontami il tuo progetto..."></textarea>
-          <button class="btn-submit">Invia messaggio</button>
-        </div>
+        <form class="cform" action="https://formsubmit.co/manzoangelopsn@gmail.com" method="POST">
+          <!-- Anti-spam honeypot -->
+          <input type="text" name="_honey" style="display:none">
+          <!-- Disabilita captcha -->
+          <input type="hidden" name="_captcha" value="false">
+          <!-- Oggetto email -->
+          <input type="hidden" name="_subject" value="Nuovo contatto dal sito web!">
+          <!-- Redirect dopo invio -->
+          <input type="hidden" name="_next" value="https://manzoangelopsn-code.github.io/landing-page-personale/">
+          <!-- Template email -->
+          <input type="hidden" name="_template" value="table">
+          
+          <input type="text" name="nome" placeholder="Il tuo nome" required />
+          <input type="email" name="email" placeholder="Email" required />
+          <input type="text" name="servizio" placeholder="Di cosa hai bisogno?" />
+          <textarea rows="4" name="messaggio" placeholder="Raccontami il tuo progetto..."></textarea>
+          <button type="submit" class="btn-submit">Invia messaggio</button>
+        </form>
       </div>
     </div>
   </section>
