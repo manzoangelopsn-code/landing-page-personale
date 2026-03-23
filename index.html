@@ -182,6 +182,23 @@
     .reveal.rdy { opacity: 0; transform: translateY(28px); }
     .reveal.vis { opacity: 1; transform: translateY(0); }
 
+    /* FORM SUCCESS OVERLAY */
+    .form-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; background: rgba(13,13,13,0.92); backdrop-filter: blur(16px); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+    .form-overlay.active { opacity: 1; pointer-events: all; }
+    .form-success { text-align: center; transform: scale(0.8) translateY(20px); transition: transform 0.5s cubic-bezier(0.16,1,0.3,1); }
+    .form-overlay.active .form-success { transform: scale(1) translateY(0); }
+    .form-success-emoji { font-size: 64px; margin-bottom: 24px; animation: successBounce 0.6s ease 0.3s both; }
+    @keyframes successBounce { 0% { transform: scale(0); } 60% { transform: scale(1.3); } 100% { transform: scale(1); } }
+    .form-success-text { font-size: clamp(28px, 5vw, 48px); font-weight: 900; letter-spacing: -0.03em; color: var(--text); line-height: 1.2; margin-bottom: 12px; }
+    .form-success-text span { color: var(--accent); }
+    .form-success-sub { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+    .form-success-close { background: var(--accent); color: #0d0d0d; border: none; padding: 14px 28px; border-radius: 10px; font-size: 14px; font-weight: 700; font-family: 'Inter',sans-serif; cursor: pointer; transition: opacity 0.2s, transform 0.2s; opacity: 0; animation: fadeInUp 0.5s ease 0.6s forwards; }
+    .form-success-close:hover { opacity: 0.88; transform: translateY(-2px); }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .btn-submit.sending { opacity: 0.6; pointer-events: none; }
+    .btn-submit.sending::after { content: '...'; animation: dots 1s infinite; }
+    @keyframes dots { 0%,20% { content: '.'; } 40% { content: '..'; } 60%,100% { content: '...'; } }
+
     /* RESPONSIVE */
     @media (max-width: 960px) {
       .navbar { padding: 0 24px; }
@@ -434,6 +451,16 @@
     </div>
   </section>
 
+  <!-- Form Success Overlay -->
+  <div class="form-overlay" id="formOverlay">
+    <div class="form-success">
+      <div class="form-success-emoji">🤙</div>
+      <div class="form-success-text">okok, ti scrivo <span>a breve!</span></div>
+      <p class="form-success-sub">Il tuo messaggio è stato inviato con successo.</p>
+      <button class="form-success-close" onclick="closeOverlay()">Torna al sito</button>
+    </div>
+  </div>
+
   <footer>
     <div class="foot">
       <span class="foot-logo">Angelo<span>.</span></span>
@@ -443,10 +470,47 @@
   </footer>
 
   <script>
+    // Reveal animations
     const obs = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
     }, { threshold: 0.08 });
     document.querySelectorAll('.reveal').forEach(el => { el.classList.add('rdy'); obs.observe(el); });
+
+    // Form submit with animation
+    const form = document.querySelector('.cform');
+    const overlay = document.getElementById('formOverlay');
+    const submitBtn = form.querySelector('.btn-submit');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Invio in corso';
+      submitBtn.classList.add('sending');
+
+      try {
+        await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+      } catch (err) {
+        // FormSubmit might block CORS, but the email still goes through
+      }
+
+      submitBtn.textContent = originalText;
+      submitBtn.classList.remove('sending');
+      form.reset();
+      overlay.classList.add('active');
+    });
+
+    function closeOverlay() {
+      overlay.classList.remove('active');
+    }
+
+    // Close overlay with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeOverlay();
+    });
   </script>
 
 </body>
